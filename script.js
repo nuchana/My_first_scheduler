@@ -16,10 +16,10 @@ $(document).ready(function () {
 
         // loop through an array of object
         timeBlocks.each(function () {
-            
+
             var thisBlock = $(this);
             var thisBlockHr = parseInt(thisBlock.attr("data-hour"));
-            
+
             var todoObject = {
                 // set todo hour to same as data-hour
                 hour: thisBlockHr,
@@ -39,9 +39,9 @@ $(document).ready(function () {
 
     // Initialize time block depending on present, past and future
     function initializeTimeBlocks() {
-      
+
         timeBlocks.each(function () {
-          
+
             var thisBlock = $(this);
             var thisBlockHr = parseInt(thisBlock.attr("data-hour"));
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
             }
         }
         localStorage.setItem("todos", JSON.stringify(toDoItems));
-        renderSchedule(); 
+        renderSchedule();
     }
 
     //format the timeblocks depending on time
