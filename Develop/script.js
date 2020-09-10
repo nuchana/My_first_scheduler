@@ -10,18 +10,23 @@ var currentHour = moment().format("H");
 
 // when the document load
 $(document).ready(function () {
-
+    // set up todo items
     function setupToDO() {
-        console.log(toDoItems);
-        // setup todo items and loop through an array of object
+        // console.log(setupToDo);
+
+        // loop through an array of object
         timeBlocks.each(function () {
+            
             var thisBlock = $(this);
             var thisBlockHr = parseInt(thisBlock.attr("data-hour"));
+            
             var todoObject = {
+                // set todo hour to same as data-hour
                 hour: thisBlockHr,
+                // get text ready for user input
                 text: "",
             }
-
+            // add todo obj to an array of to-do items
             toDoItems.push(todoObject);
 
         });
@@ -34,8 +39,9 @@ $(document).ready(function () {
 
     // Initialize time block depending on present, past and future
     function initializeTimeBlocks() {
+      
         timeBlocks.each(function () {
-            // console.log(timeBlocks)
+          
             var thisBlock = $(this);
             var thisBlockHr = parseInt(thisBlock.attr("data-hour"));
 
@@ -48,7 +54,7 @@ $(document).ready(function () {
                 thisBlock.addClass("past");
 
             }
-            if (thisBlock > currentHour) {
+            if (thisBlockHr > currentHour) {
                 thisBlock.addClass("future");
             }
 
@@ -71,7 +77,7 @@ $(document).ready(function () {
 
         }
 
-        console.log(toDoItems);
+        console.log(toDoItems);// why it show null???
     }
 
     function saveHandler() {
@@ -80,7 +86,7 @@ $(document).ready(function () {
         var hourToUpdate = $(this).parent().attr("data-hour");
         var itemToAdd = (($(this).parent()).children("textarea")).val();
 
-        //see which item we need to update based on the hour of the button clicked matching
+        //see which item to be updated depending on the hour of the button clicked 
         for (var j = 0; j < toDoItems.length; j++) {
             if (toDoItems[j].hour == hourToUpdate) {
                 //set its text to what was added to textarea
@@ -88,7 +94,7 @@ $(document).ready(function () {
             }
         }
         localStorage.setItem("todos", JSON.stringify(toDoItems));
-        renderSchedule(); // redundant?
+        renderSchedule(); 
     }
 
     //format the timeblocks depending on time
@@ -97,7 +103,7 @@ $(document).ready(function () {
     if (!localStorage.getItem("todos")) {
         //initialize the array of objects
         setupToDO();
-    } //otherwise dont bother bc we get it from local storage
+    } //otherwise we get it from local storage
 
     //display current date
     currentDay.text(currentDate);
